@@ -38,6 +38,19 @@ create table names (
 
 
 
+# show values / show table content 
+```sql
+sqlite> .headers on -- for output with column names
+sqlite> .mode column -- for padded output
+sqlite> select * from meetings
+```
+output
+```
+n_id  s_name         s_location            
+----  -------------  ----------------------
+1     Grafted Scion  Chapel of Anticipation
+2     Margit         Stormhill
+```
 
 # main differences mysql and sqlite 
 
