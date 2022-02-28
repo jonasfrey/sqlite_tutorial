@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ex1_solutions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>Datenbanken
+Ubungsblatt 1 ̈</p>
+<h1 id="aufgabe-1">Aufgabe 1</h1>
+<p>Sie m ̈ochten in einer Tabelle in einer Datenbank speichern, an welchem Datum
+Sie sich mit welcher Person an welchem Ort getroffen haben.</p>
+<ol>
+<li>Geben Sie das Schema dieser Datenbank.</li>
+<li>Geben Sie ein Beispiel f ̈ur eine Instanz dieses Schemas.</li>
+</ol>
+<h1 id="solution-1">solution 1</h1>
+<pre class="hljs"><code><div><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> meetings (
+    n_id <span class="hljs-built_in">integer</span> primary <span class="hljs-keyword">key</span> autoincrement,
+    s_name <span class="hljs-built_in">varchar</span>(<span class="hljs-number">512</span>), 
+    s_location <span class="hljs-built_in">varchar</span>(<span class="hljs-number">512</span>)
+);
+<span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> meetings (
+    s_name,
+    s_location 
+)
+<span class="hljs-keyword">values</span> 
+(
+    <span class="hljs-string">"Grafted Scion"</span>, 
+    <span class="hljs-string">"Chapel of Anticipation"</span> 
+), 
+(
+    <span class="hljs-string">"Margit"</span>, 
+    <span class="hljs-string">"Stormhill"</span>
+)
+
+</div></code></pre>
+<div class="page"/>
+<h1 id="aufgabe-2">Aufgabe 2</h1>
+<ol>
+<li>Erweitern Sie das Beispiel aus der letzten Aufgabe: Sie wollen in der selben
+Tabelle auch noch die Telefonnummer der Personen speichern.</li>
+<li>Erkl ̈aren Sie anhand dieses Beispiels Redundanz in einer Datenbank.</li>
+<li>Erkl ̈aren Sie, wie aus dieser Redundanz Inkonsistenz entstehen kann.</li>
+</ol>
+<h1 id="solution-2">solution 2</h1>
+<pre class="hljs"><code><div><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> meetings
+<span class="hljs-keyword">add</span> <span class="hljs-keyword">column</span> n_phone_number <span class="hljs-built_in">int</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> meetings (
+    s_name,
+    s_location, 
+    n_phone_number
+)
+<span class="hljs-keyword">values</span> 
+(
+    <span class="hljs-string">"Margit"</span>, 
+    <span class="hljs-string">"Stormhill"</span>, 
+    <span class="hljs-number">0313212121</span> 
+)
+</div></code></pre>
+<pre class="hljs"><code><div>1|Grafted Scion|Chapel of Anticipation|
+2|Margit|Stormhill|
+3|Margit|Stormhill|313212121
+</div></code></pre>
+<p>wenn nun die zb die person &quot;margit&quot; wieder getroffen wird, ist sie redundant in der tabelle weil ihr gleicher name 2 mal gespeichert ist, ausserdem sind die daten inkonsistent weil im 2. eintrag ihre telefonnummer vorhanden ist, beim ersten jedoch nicht.</p>
+<h2 id="redundanz">redundanz</h2>
+<p>wuerde der name margit in einem record geaendert werde, muesste jeder record mit diesem namen geandert werden um konsistenz zu bewahren. das selbe gilt fuer die location &quot;stormhill&quot;</p>
+<div class="page"/>
+<h1 id="aufgabe-3">Aufgabe 3</h1>
+<p>Gegeben seien die Tabellen 'instructor' undde 'partmentals' CSV-Dateien. Implementieren Sie folgende Abfragen einer Ihnen genehmen Programmiersprache:</p>
+<ol>
+<li>select name
+from instructor
+where ID = '22222'</li>
+<li>select building
+from instructor, department
+where instructor.dept_name = department.dept_name and
+name = 'Einstein'</li>
+</ol>
+<p>Warum nutzt man eine deklarative Sprache wie SQL zur Datenbankabfrage?
+Warum nicht eine prozedurale Programmiersprache wie Java oder Python?</p>
+<h1 id="solution-3">solution 3</h1>
+<h2 id="instructorscsv">instructors.csv</h2>
+<pre class="hljs"><code><div>ID,name,dept_name
+1,GLaDOS,aperture science
+22222,Einstein,LHEP
+</div></code></pre>
+<h2 id="departmentcsv">department.csv</h2>
+<pre class="hljs"><code><div>ID,dept_name,building
+1,aperture science,Aperture Laboratories
+2,LHEP,G6
+</div></code></pre>
+<div class="page"/>
+<h2 id="python-code-1">python code 1.</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> <span class="hljs-keyword">name</span>
+    <span class="hljs-keyword">from</span> instructor
+    <span class="hljs-keyword">where</span> <span class="hljs-keyword">ID</span> = <span class="hljs-string">'22222'</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index_of</span><span class="hljs-params">(s_haystack, s_searchterm)</span>:</span> 
+    n_index = <span class="hljs-number">-1</span>
+    <span class="hljs-keyword">try</span>: 
+        n_index = s_haystack.index(s_searchterm) 
+        <span class="hljs-keyword">return</span> n_index
+    <span class="hljs-keyword">except</span>: 
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>
+
+a_instructor_records = open(<span class="hljs-string">"instructor.csv"</span>, <span class="hljs-string">"r"</span>).readlines()
+a_result = list(filter(<span class="hljs-keyword">lambda</span> s_record:  index_of(s_record, <span class="hljs-string">"22222,"</span>) == <span class="hljs-number">0</span>, a_instructor_records))
+print(<span class="hljs-string">"-----records-----"</span>)
+print(<span class="hljs-string">"\n"</span>.join(a_result))
+
+
+</div></code></pre>
+<h2 id="python-code-2">python code 2.</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> building
+    <span class="hljs-keyword">from</span> instructor, department
+    <span class="hljs-keyword">where</span> instructor.dept_name = department.dept_name <span class="hljs-keyword">and</span>
+       <span class="hljs-keyword">name</span> = <span class="hljs-string">'Einstein'</span>
+</div></code></pre>
+<pre class="hljs"><code><div>a_instructor_records = open(<span class="hljs-string">"instructor.csv"</span>, <span class="hljs-string">"r"</span>).readlines()
+a_records_instructor = list(filter(<span class="hljs-keyword">lambda</span> s_record: index_of(s_record, <span class="hljs-string">",Einstein,"</span>) != <span class="hljs-number">-1</span>,a_instructor_records))
+
+a_instructor_columnnames = a_instructor_records[<span class="hljs-number">0</span>].strip().split(<span class="hljs-string">","</span>)
+
+
+a_department_records = open(<span class="hljs-string">"department.csv"</span>, <span class="hljs-string">"r"</span>).readlines()
+a_department_columnnames = a_department_records[<span class="hljs-number">0</span>].strip().split(<span class="hljs-string">","</span>)
+a_department_records_results = []
+a_instructor_records_results = []
+
+
+<span class="hljs-keyword">for</span> s_instructor_record <span class="hljs-keyword">in</span> a_records_instructor:
+    a_recs =  list(filter(<span class="hljs-keyword">lambda</span> s_record: (index_of(s_record, s_instructor_record.split(<span class="hljs-string">","</span>)[a_instructor_columnnames.index(<span class="hljs-string">"dept_name"</span>)]) != <span class="hljs-number">-1</span>), a_department_records))
+    <span class="hljs-keyword">if</span>(len(a_recs) &gt; <span class="hljs-number">0</span>): 
+        a_department_records_results = a_department_records_results + a_recs
+        a_instructor_records_results.append(s_instructor_record)
+
+
+s_colname = <span class="hljs-string">"building"</span>
+
+print(<span class="hljs-string">"---records instructor ---"</span>)
+n_col_index = <span class="hljs-number">0</span>
+<span class="hljs-keyword">try</span>:
+    n_col_index = a_instructor_columnnames.index(s_colname)
+    <span class="hljs-keyword">for</span> s_record <span class="hljs-keyword">in</span> a_instructor_records_results:
+        print(
+            s_record.split(<span class="hljs-string">","</span>)[n_col_index]
+        )
+<span class="hljs-keyword">except</span>:
+    print(s_colname+ <span class="hljs-string">": column does not exist in instructor.csv"</span>)
+
+
+
+<span class="hljs-comment"># print(n_col_index = a_department_columnnames.index(s_colname))</span>
+print(<span class="hljs-string">"---records department ---"</span>)
+n_col_index = <span class="hljs-number">0</span>
+<span class="hljs-keyword">try</span>:
+    n_col_index = a_department_columnnames.index(s_colname)
+
+    <span class="hljs-keyword">for</span> s_record <span class="hljs-keyword">in</span> a_department_records_results:
+        <span class="hljs-comment"># print(s_record)</span>
+        print(s_record.split(<span class="hljs-string">","</span>)[n_col_index])
+<span class="hljs-keyword">except</span>:
+    print(s_colname+ <span class="hljs-string">": column does not exist in department.csv"</span>)
+</div></code></pre>
+<h2 id="oupyt-of-python-script">oupyt of python script</h2>
+<pre class="hljs"><code><div>-----records-----
+22222,Einstein,LHEP
+---records instructor ---
+building: column does not exist in instructor.csv
+---records department ---
+G6
+</div></code></pre>
+<h2 id="fazit">fazit</h2>
+<p>wie wir sehen ist der python code hochkomplex, es werden staendig filter funktionen mit lambda verwendet und es muessen oft, je nach komplexitaet der abzubildenden sql abfrage, mehrere verschachtelte loops erstellt werden um realtationen zwischen verschiedenen tabellen gegenzupruefen</p>
+<p>sql ist viel kurzer und intuitiver geschrieben</p>
+<h1 id="aufgabe-4">Aufgabe 4</h1>
+<p>Gegeben sei ein Array in der globalen Variable a mit Kontostaendnden in nicht-fluechtigem Speicher. Es soll die Integritaetsbedingung gelten, dass die Summe
+aller Werte des Arrays gleich bleibt. Nun soll das erste Konto geleert und auf
+das zweite Konto ̈uberwiesen werden. Dazu gibt es die Funktion:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">transact</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a)</span>
+    a[1] </span>= a[<span class="hljs-number">1</span>] + a[<span class="hljs-number">0</span>];
+    a[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+</div></code></pre>
+<p>Erklaeren Sie, wie bei einem Systemabsturz die Integrit ̈atsbedingung verletzt wer-
+den kann.</p>
+<p>Erweitern Sie die Funktion auf geeignete Weise, um sicherzustellen, dass die Integrit ̈atsbedingung zu jedem Zeitpunkt gilt.</p>
+<h2 id="problem">problem</h2>
+<p>wenn das programm nach zeile <code> a[1] = a[1] + a[0];</code> abstuerzt , dann hat das konto <code>a[1]</code> einen groesseren wert und <code>a[0]</code> wurde nicht geleert, die summe aller konten ist somit groesser als vor dem funktionscall transact, die integriaets bedingung wurde verletzt.</p>
+<h2 id="loesung">loesung</h2>
+<p>wir kopieren das ganze array in ein temporaeres array und nehmen dort alle manipulationen vor, erst ganz am schluss wenn alle manipulationen erfolgt sind, koennen wir das temporaere array zurueck kopieren, wenn der code vorher abstuerzt sind nur die temporaeren daten betroffen, die originaldaten bleiben unveraendert, die integritaet ist gesichert!</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">transact</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a)</span>
+
+    <span class="hljs-keyword">int</span> a_tmp[<span class="hljs-title">sizeof</span><span class="hljs-params">(a)</span>]</span>;
+    <span class="hljs-comment">// do the manipulation on a temporary copy</span>
+    <span class="hljs-built_in">memcpy</span>(a, a_tmp, <span class="hljs-keyword">sizeof</span>(a)); 
+    a_tmp[<span class="hljs-number">1</span>] = a_tmp[<span class="hljs-number">1</span>] + a_tmp[<span class="hljs-number">0</span>];
+    a_tmp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+
+    <span class="hljs-comment">// if we reached this line , no crash has happened</span>
+    <span class="hljs-built_in">memcpy</span>(a_tmp, a, <span class="hljs-keyword">sizeof</span>(a_tmp)); 
+
+</div></code></pre>
+
+</body>
+</html>
