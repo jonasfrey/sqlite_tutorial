@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>solutions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>Databases
+Exercise Sheet 2</p>
+<h1 id="exercise-1-operationen-auf-mengen">Exercise 1 (Operationen auf Mengen)</h1>
+<p>Gegeben sind die Mengen</p>
+<pre class="hljs"><code><div>Starters    = {salad, soup}, 
+Main        = {pizza, steak},
+Dessert     = {fruit, icecream},
+
+Relationen 
+Father      = {(adam, bert), (bert, carl)}
+Car         = {(adam, audi), (bert, bmw), (carl, chevy)}.
+</div></code></pre>
+<p>Berechnen Sie:</p>
+<pre class="hljs"><code><div>1.Starters×Main×Dessert
+</div></code></pre>
+<h2 id="solution">solution</h2>
+<pre class="hljs"><code><div>(salad, pizza, fruit),(salad, pizza, icecream),
+(salad, steak, fruit),(salad, steak, icecream),
+
+(soup, pizza, fruit),(soup, pizza, icecream),
+(soup, steak, fruit),(soup, steak, icecream),
+</div></code></pre>
+<pre class="hljs"><code><div>2.Father.Father
+</div></code></pre>
+<pre class="hljs"><code><div>{(adam, bert), (bert, carl), (adam, bert), (bert, carl)}
+</div></code></pre>
+<pre class="hljs"><code><div>3.Father.Car
+</div></code></pre>
+<pre class="hljs"><code><div>{(adam, bert), (bert, carl), (adam, audi), (bert, bmw), (carl, chevy)}
+</div></code></pre>
+<pre class="hljs"><code><div>4.Car.Father
+</div></code></pre>
+<pre class="hljs"><code><div>{(adam, audi), (bert, bmw), (carl, chevy), (adam, bert), (bert, carl)}
+</div></code></pre>
+<h1 id="exercise-2-aussagen-%CC%88uber-mengen">Exercise 2 (Aussagen ̈uber Mengen)</h1>
+<p>Welche der folgenden Aussagen sind wahr? Begr ̈unden Sie jeweils, warum. Wenn eine Aussage
+falsch ist, dann zeigen Sie das mit einem Gegenbeispiel. Die MengenA, B, Cseien Teilmengen
+einer beliebigen endlichen GrundmengeU.</p>
+<ol>
+<li>Wenn A ∪ B = A ∪ C dann B = C.</li>
+</ol>
+<h2 id="solution">solution</h2>
+<p>True</p>
+<br>
+<ol start="2">
+<li>Es gilt A ⊆ B genau dann wenn  ̄B ⊆  ̄A.</li>
+</ol>
+<h2 id="solution">solution</h2>
+<p>false</p>
+<br>
+<ol start="3">
+<li>A × B = B × A</li>
+</ol>
+<h2 id="solution">solution</h2>
+<p>true</p>
+<br>
+<ol start="4">
+<li>|A × B|= |A|·|B|</li>
+</ol>
+<h2 id="solution">solution</h2>
+<p>true</p>
+<br>
+<h1 id="exercise-3-mengen-als-listen">Exercise 3 (Mengen als Listen)</h1>
+<p>Mengen werden h ̈aufig mit Hilfe von Listen implementiert. Geben Sie in einer Program-
+miersprache ihrer Wahl oder in Pseudocode eine Funktionboolean equals(list l1,list
+l2)an, die genau danntrueliefert, wenn die Mengen der Elemente der beiden Listen gle-
+ich sind. Gegeben sind die Funktionenint head(list l)undlist tail(list l), die f ̈ur
+nichtleere Listen jeweils das erste Element und die Restliste liefern, sowie die Funktionboolean
+empty(list l). Geben Sie m ̈oglichst einfachen, kurzen und offensichtlich korrekten Code an,
+die Laufzeit spielt keine Rolle. Definieren Sie sich geeignete Hilfsfunktionen.</p>
+<h2 id="solution">solution</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove_duplicates</span><span class="hljs-params">(a_1)</span>:</span> 
+    <span class="hljs-keyword">return</span> list(dict.fromkeys(a_1))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">equals</span><span class="hljs-params">(a_1, a_2)</span>:</span> 
+    a_1 = remove_duplicates(a_1)
+    a_2 = remove_duplicates(a_2)
+
+    b_equal = <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> a_1: 
+        <span class="hljs-keyword">if</span> n <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> a_2: 
+            b_equal = <span class="hljs-literal">False</span>
+            <span class="hljs-keyword">break</span>
+
+    <span class="hljs-keyword">if</span> len(a_1) != len(a_2):
+        b_equal = <span class="hljs-literal">False</span>
+
+    <span class="hljs-keyword">return</span> b_equal
+
+a_1 = [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">5</span>]
+a_2 = [<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">6</span>,<span class="hljs-number">5</span>]
+print(<span class="hljs-string">f"<span class="hljs-subst">{a_1}</span> equals <span class="hljs-subst">{a_2}</span> : <span class="hljs-subst">{equals(a_1, a_2)}</span>"</span>)
+
+a_1 = [<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>]
+a_2 = [<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">6</span>,<span class="hljs-number">5</span>]
+print(<span class="hljs-string">f"<span class="hljs-subst">{a_1}</span> equals <span class="hljs-subst">{a_2}</span> : <span class="hljs-subst">{equals(a_1, a_2)}</span>"</span>)
+
+a_1 = [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]
+a_2 = [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>]
+print(<span class="hljs-string">f"<span class="hljs-subst">{a_1}</span> equals <span class="hljs-subst">{a_2}</span> : <span class="hljs-subst">{equals(a_1, a_2)}</span>"</span>)
+
+a_1 = [<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">11</span>]
+a_2 = [<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">11</span>]
+print(<span class="hljs-string">f"<span class="hljs-subst">{a_1}</span> equals <span class="hljs-subst">{a_2}</span> : <span class="hljs-subst">{equals(a_1, a_2)}</span>"</span>)
+</div></code></pre>
+<p>console output</p>
+<pre class="hljs"><code><div>[1, 3, 5, 6, 5] equals [5, 3, 1, 6, 5] : True
+[3, 3, 3, 1] equals [5, 3, 1, 6, 5] : False
+[2, 3, 4] equals [3, 4, 4] : False
+[4, 4, 2, 2, 11] equals [2, 4, 2, 4, 11] : True
+</div></code></pre>
+<h1 id="exercise-4-mengen-von-nat-%CC%88urlichen-zahlen-als-boolean-arrays">Exercise 4 (Mengen von Nat ̈urlichen Zahlen als Boolean Arrays)</h1>
+<p>Eine endliche MengeSvon nat ̈urlichen Zahlen kann man als Arrayboolean[] srepr ̈asen-
+tieren, wie folgt: so dass gilt:</p>
+<pre class="hljs"><code><div>s[n] = true fallsn∈S
+s[n] = false fallsn /∈S.
+</div></code></pre>
+<p>Die MengeS={ 1 , 3 , 4 }ist dann durch folgendes Array repr ̈asentiert:</p>
+<pre class="hljs"><code><div>s[0] = false
+s[1] = true
+s[2] = false
+s[3] = true
+s[4] = true.
+</div></code></pre>
+<p>Geben Sie m ̈oglichst einfache Algorithmen in Pseudocode an f ̈ur folgende Funktionen:</p>
+<pre class="hljs"><code><div>1.boolean subset(boolean[] s, boolean[] t), die genau danntrueliefert, wennS
+eine Teilmenge vonTist
+2.boolean[] union(boolean[] s, boolean[] t), die die (Repr ̈asentation der) Mengen-
+vereinigung vonSundTliefert.
+</div></code></pre>
+<h2 id="solution">solution</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">union</span><span class="hljs-params">(a_booleans_s, a_booleans_t)</span>:</span>
+    a_booleans_bigger = a_booleans_t
+    a_booleans_smaller = a_booleans_s
+    <span class="hljs-keyword">if</span> len(a_booleans_s) &gt; len(a_booleans_t): 
+        a_booleans_bigger = a_booleans_s
+        a_booleans_smaller = a_booleans_t
+
+    <span class="hljs-keyword">for</span> index, b <span class="hljs-keyword">in</span> enumerate(a_booleans_bigger): 
+        <span class="hljs-keyword">if</span> b == <span class="hljs-literal">False</span>: 
+            <span class="hljs-keyword">if</span> len(a_booleans_smaller)<span class="hljs-number">-1</span> &gt;= index: 
+                a_booleans_bigger[index] = a_booleans_smaller[index]
+
+    <span class="hljs-keyword">return</span> a_booleans_bigger
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subset</span><span class="hljs-params">(a_booleans_s, a_booleans_t)</span>:</span>
+    <span class="hljs-comment"># return true if a_booleans_s is a subset of a_booleans_t</span>
+    b_is_subset = <span class="hljs-literal">True</span>
+    b_first_value = <span class="hljs-literal">False</span>
+    <span class="hljs-keyword">for</span> index, b <span class="hljs-keyword">in</span> enumerate(a_booleans_s): 
+        <span class="hljs-keyword">if</span>(b): 
+            b_first_value = <span class="hljs-literal">True</span>
+        <span class="hljs-keyword">if</span>(b_first_value):
+            <span class="hljs-keyword">if</span>(a_booleans_t[index] != b):
+                b_is_subset = <span class="hljs-literal">False</span> 
+                <span class="hljs-keyword">break</span>
+
+    <span class="hljs-keyword">return</span> b_is_subset
+
+
+a_b_1 = [<span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>] <span class="hljs-comment"># {4,7}</span>
+a_b_2 = [<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>] <span class="hljs-comment"># {1,3,4,7}</span>
+print(<span class="hljs-string">f"<span class="hljs-subst">{a_b_1}</span> subset <span class="hljs-subst">{a_b_2}</span> :\n <span class="hljs-subst">{subset(a_b_1, a_b_2)}</span>"</span>)
+
+
+
+a_b_1 = [<span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>] <span class="hljs-comment"># {2, 3, 5}</span>
+a_b_2 = [<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>] <span class="hljs-comment"># {1,2,6}</span>
+a_unioned = union(a_b_1, a_b_2) <span class="hljs-comment"># [False, True, True, True, False, True, True] -&gt; {1,2,3,5,6} </span>
+
+print(<span class="hljs-string">f"<span class="hljs-subst">{a_b_1}</span> union <span class="hljs-subst">{a_b_2}</span> :\n <span class="hljs-subst">{union(a_b_1, a_b_2)}</span>"</span>)
+
+</div></code></pre>
+<p>console output</p>
+<pre class="hljs"><code><div>[False, False, False, False, True, False, False, True] subset [False, True, False, True, True, False, False, True] :
+ True
+[False, False, True, True, False, True] union [False, True, True, True, False, True, True] :
+ [False, True, True, True, False, True, True]
+</div></code></pre>
+<h1 id="exercise-5-relationen-als-boolean-arrays">Exercise 5 (Relationen als Boolean Arrays)</h1>
+<p>Eine endliche bin ̈are RelationRauf den nat ̈urlichen Zahlen sei als ein zweidimensionales Array
+boolean[][] rrepr ̈asentiert, so dass gilt:</p>
+<pre class="hljs"><code><div>r[m][n] = true falls (m, n)∈R
+r[m][n] = false falls (m, n)∈/R.
+</div></code></pre>
+<p>Geben Sie einen m ̈oglichst einfachen Algorithmus in Pseudocode an f ̈ur die Funktion
+boolean[][] compose(boolean[][] r, boolean[][] t),
+die die (Repr ̈asentation der) Komposition der RelationenRundTliefert.</p>
+<h2 id="solution">solution</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> re <span class="hljs-keyword">import</span> L
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compose</span><span class="hljs-params">(a_2d_booleans_r, a_2d_booleans_t)</span>:</span> 
+    <span class="hljs-comment">#a_2d_booleans_r after a_2d_booleans_t</span>
+    o_mapping_1 = {}
+    <span class="hljs-keyword">for</span> index_y, a_2d_booleans_t_x <span class="hljs-keyword">in</span> enumerate(a_2d_booleans_t):
+        <span class="hljs-keyword">for</span> index_x, b <span class="hljs-keyword">in</span> enumerate(a_2d_booleans_t_x):
+            <span class="hljs-keyword">if</span>(b):
+                o_mapping_1[index_y] = index_x
+    
+    o_mapping_2 = {}
+    <span class="hljs-keyword">for</span> index_y, a_2d_booleans_r_x <span class="hljs-keyword">in</span> enumerate(a_2d_booleans_r):
+        <span class="hljs-keyword">for</span> index_x, b <span class="hljs-keyword">in</span> enumerate(a_2d_booleans_r_x):
+            <span class="hljs-keyword">if</span>(b):
+                o_mapping_2[index_y] = index_x
+
+
+    o_mapping_final = {}
+
+    <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> o_mapping_1: 
+        val = o_mapping_1[key]
+
+        o_mapping_final[key] = o_mapping_2[int(val)]
+
+    <span class="hljs-keyword">return</span> o_mapping_final
+
+
+
+a_2d_booleans_r = [
+    [<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>],
+    [<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>,],
+    [<span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>],
+    [<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>]
+]
+a_2d_booleans_t = [
+    [<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>],
+    [<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>,],
+    [<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>],
+    [<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>]
+]
+o_mapping_final = compose(a_2d_booleans_r, a_2d_booleans_t)
+print(
+<span class="hljs-string">"""
+a_2d_booleans_r = [
+    [False, True, True, False],
+    [True, True, False, False,],
+    [False, False, False, True],
+    [False, True, True, True]
+]
+composed with 
+a_2d_booleans_t = [
+    [False, True, False, True],
+    [True, True, False, False,],
+    [False, True, False, False],
+    [False, True, False, False]
+]
+= """</span>
+)
+print(
+    o_mapping_final
+)
+</div></code></pre>
+<p>console output</p>
+<pre class="hljs"><code><div>a_2d_booleans_r = [
+    [False, True, True, False], 
+    [True, True, False, False,],
+    [False, False, False, True],
+    [False, True, True, True]   
+]
+composed with
+a_2d_booleans_t = [
+    [False, True, False, True], 
+    [True, True, False, False,],
+    [False, True, False, False],
+    [False, True, False, False] 
+]
+=
+{0: 3, 1: 1, 2: 1, 3: 1}
+</div></code></pre>
+<h1 id="exercise-6-anzahl-relationen-zwischen-mengen">Exercise 6 (Anzahl Relationen zwischen Mengen)</h1>
+<p>Gegeben seien zwei MengenAundBmit|A|=mund|B|=n. Wieviele Relationen zwischen
+AundBgibt es? Betrachten Sie Beispiele. Begr ̈unden Sie Ihre Antwort.</p>
+<h2 id="solution">solution</h2>
+<p>da jedes element aus menge A mit jedem element aus menge B kombiniert wird, gibt es |A| * |B| anzahl elemente, es wie ein bild/2d matrix mit width und height anzahl pixel ist dann width * height. Kommt eine dritte dimension dazu, wird es x * y * z</p>
+
+</body>
+</html>
