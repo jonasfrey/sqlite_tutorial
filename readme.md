@@ -64,3 +64,7 @@ n_id  s_name         s_location
 |6.|It requires large space in the memory for its functioning (approx 600 Mb).|It requires only| some KBs of space as it is very lightweight approx (250Kb-300Kb).
 |7.|MySQL supports multiple user environment.|SQLite does not support multiple user environment.|
 |8.|It also supports XML format.|It does not supports XML format.|
+
+
+# online sql editor / fiddle / playground / try / practice / 
+https://www.w3schools.com/sql/trysql.asp?filename=trysql_asc

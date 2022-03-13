@@ -136,6 +136,10 @@ s:
 
 
 ## solution 
+```sql
+-- πA(r)
+select A from r
+```
 1. result: 
 |A|
 |---|
@@ -144,13 +148,25 @@ s:
 |c|
 
 2. result: 
+```sql
+-- σA=‘b‘(r)
+select * from r where A = 'b'
+```
 |A|B|
 |---|---|
 |b| d|
 |b| e|
 
 3. result: 
-
+```sql
+-- r×s
+select 
+    r.A as "r.A"
+    r.B as "r.B"
+    s.A as "s.A"
+    s.B as "s.B"
+    from r, s
+```
 |r.A|r.B|s.B|s.C|
 |---|---|---|---|
 |a|d|d|g|
@@ -163,6 +179,16 @@ s:
 |c|f|e|h|
 
 4. 
+```sql
+-- σr.B=s.B(r×s)
+select 
+    r.A as "r.A"
+    r.B as "r.B"
+    s.A as "s.A"
+    s.B as "s.B"
+    where r.B = s.B
+    from r, s
+```
 |r.A|r.B|s.B|s.C|
 |---|---|---|---|
 |a|d|d|g|
@@ -220,6 +246,35 @@ works (personname, companyname, salary)
 4. Finde die Namen aller Angestellten, die mehr verdienen als jeder Angestellte der
     FBC.
 
+## solution 
+1. 
+```sql 
+-- πpersonname(σcompanyname=‘FBC‘())
+select personname from works where companyname ="FBC"
+```
+2. 
+```sql 
+-- πpersonname(σcompanyname≠‘FBC‘())
+select personname from works where companyname not like "FBC"
+```
+3. 
+```sql 
+-- πpersonname(σworks.personname≠works2.personname^personname≠‘FBC‘^(works×works as works2))
+select works.personname 
+from works, works as works2 
+where works.personname not like works2.personname and
+works2.companyname = "FBC" and
+works2.salary >= works.salary
+```
+4. 
+```sql 
+-- πpersonname(σworks.companyname≠"FBC"^works2.companyname="FBC"^works.salary>works2.salary(works×works as works2))
+select works.personname 
+from works, works as works2 
+where works.companyname not like "FBC" and 
+works2.companyname = "FBC" and
+works.salary > works2.salary
+```
 # Aufgabe 5 (Aquivalente Ausdr ̈ ̈ucke)
 
 Gegeben sind jeweils zwei Ausdr ̈ucke der relationalen Algebrauber den Relationen ̈
@@ -232,10 +287,12 @@ jeweils Ihre Aussage.
 1. σA> 10 (πA,B(r)) und πA,B(σA> 10 (r))
 2. πA(r−t) und πA(r)−πA(t)
 ```
-## .
-
-## 2
 
 
 ## solution
 
+
+1.  
+ja, weil mit der project operation (π) keine manipulation der daten vorgenommen wird, welche in abhaengigkeit des select operators (σ) stehen koennte. dies gilt nur in jenem falle, weil die operationen mit den beiden verschiedenen operatoren auf der spalte "A" vorgenommen werden. 
+2. 
+nein weil in der minus operation die kombination von allen colums eine rolle spielt

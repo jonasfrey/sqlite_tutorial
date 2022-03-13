@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>solutions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<script>
+
+</script>
+<style>
+yellow{color:yellow}
+orange{color:orange}
+red{color:red}
+purple{color:purple}
+blue{color:blue}
+green{color:green}
+blue{color:blue;}
+</style>
+<p>Datenbanken
+Ubungsblatt 3 ̈</p>
+<h1 id="aufgabe-1-keys">Aufgabe 1 (Keys)</h1>
+<p>Folgende Relation sagt aus an welchen Tagen Sie sich mit welcher Person an welchem
+Ort getroffen haben. (Die Relation macht keine Aussagen daruber, wie oft wir uns mit ̈
+einer Person and einem Tag an einem Ort getroffen haben, falls das mehrfach passiert
+ist, und das ist auch nicht beabsichtigt.)</p>
+<table>
+<thead>
+<tr>
+<th>person</th>
+<th>place</th>
+<th>date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alice</td>
+<td>bar</td>
+<td>1.1.2017</td>
+</tr>
+<tr>
+<td>bob</td>
+<td>bar</td>
+<td>2.2.2017</td>
+</tr>
+<tr>
+<td>bob</td>
+<td>cafe</td>
+<td>3.3.2017</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p>Bestimmen Sie alle superkeys f ̈ur die gegebene Relation.</p>
+</li>
+<li>
+<p>Bestimmen Sie alle candidate keys f ̈ur die gegebene Relation.</p>
+</li>
+<li>
+<p>Bestimmen Sie alle superkeys f ̈ur das gegebene Relationsschema.</p>
+</li>
+<li>
+<p>Bestimmen Sie alle candidate keys f ̈ur das gegebene Relationsschema.</p>
+</li>
+<li>
+<p>Welchen primary key w ̈urden Sie w ̈ahlen und warum?</p>
+</li>
+</ol>
+<h2 id="solution">solution</h2>
+<ol>
+<li></li>
+</ol>
+<p>&quot;A superkey is a combination of columns that uniquely identifies any row within a relational database management system (RDBMS) table&quot; - google
+<br></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> meetings
+(
+    <span class="hljs-keyword">name</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">128</span>),
+    place <span class="hljs-built_in">varchar</span>(<span class="hljs-number">128</span>), 
+    <span class="hljs-built_in">date</span> <span class="hljs-built_in">date</span>,
+    <span class="hljs-keyword">CONSTRAINT</span> name_place_date_superkey PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-keyword">name</span>, place, <span class="hljs-built_in">date</span>)
+);
+</div></code></pre>
+<p>als superkey wuerde ich die kombination der properties 'person', 'place' und 'date' nehmen, da ansonstent kollisionen auftreten koennten und der superkey nicht mehr unique waere , beispiel:</p>
+<p>rot : kollision superkey : &quot;person&quot; und &quot;place&quot;</p>
+<p>blau : kollision superkey : &quot;place&quot; und &quot;date&quot;</p>
+<p>gelb: kollision superkey : &quot;person&quot; und &quot;date&quot;</p>
+<table>
+<thead>
+<tr>
+<th>person</th>
+<th>place</th>
+<th>date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><red>alice</red></td>
+<td><red>bar</red></td>
+<td><blue>1.1.2017</blue></td>
+</tr>
+<tr>
+<td><yellow>alice</yellow></td>
+<td>cafe</td>
+<td><yellow>1.1.2017</yellow></td>
+</tr>
+<tr>
+<td><yellow>alice</yellow></td>
+<td>park</td>
+<td><yellow>1.1.2017</yellow></td>
+</tr>
+<tr>
+<td>alice</td>
+<td><blue>cafe</blue></td>
+<td><blue>2.1.2017</blue></td>
+</tr>
+<tr>
+<td><red>alice</red></td>
+<td><red>bar</red></td>
+<td>5.1.2017</td>
+</tr>
+<tr>
+<td>bob</td>
+<td>bar</td>
+<td>1.1.2017</td>
+</tr>
+<tr>
+<td>bob</td>
+<td><blue>cafe</blue></td>
+<td><blue>2.1.2017</blue></td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li></li>
+</ol>
+<p>&quot;A candidate key, or simply a key, of a relational database is a minimal superkey.[1] In other words, it is any set of columns that have a unique combination of values in each row (which makes it a superkey), with the additional constraint that removing any column would possibly produce duplicate rows (which makes it a minimal superkey).&quot; - wikipedia</p>
+<p>der minimal superkey kann nur aus kombination von 'person', 'place' und 'date' gewaehlt werden, da die anderen kombinationen nicht unique sind, das constraint dass wenn eine property entfernt wird, kann auf einer beliebigen property ('person', 'place' , 'date') gesetzt werden</p>
+<ol start="3">
+<li>
+<p>welches relationsschema ?</p>
+</li>
+<li>
+<p>welches relationsschema ?</p>
+</li>
+<li>
+<p>ich wuerde fuer jeden neuen db eintrag einen autoincrement integer &quot;id&quot; als primary key verwenden, damit jeder datensatz eindeutig zu unterscheiden ist</p>
+</li>
+</ol>
+<h1 id="aufgabe-2-keys">Aufgabe 2 (Keys)</h1>
+<p>Folgende Relation gibt Auskunft ̈uber Skilifte und deren Attribute.</p>
+<table>
+<thead>
+<tr>
+<th>TelefonNr</th>
+<th>Ort</th>
+<th>Skigebiet</th>
+<th>Lift</th>
+<th>Kapazitaet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>033 854 12 12</td>
+<td>Grindelwald</td>
+<td>First</td>
+<td>Oberjoch</td>
+<td>2500</td>
+</tr>
+<tr>
+<td>033 854 12 12</td>
+<td>Grindelwald</td>
+<td>First</td>
+<td>Oberlaeger</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>033 854 12 12</td>
+<td>Grindelwald</td>
+<td>Kl. Scheidegg</td>
+<td>Fallboden</td>
+<td>3000</td>
+</tr>
+<tr>
+<td>033 854 12 14</td>
+<td>Wengen</td>
+<td>Kl. Scheidegg</td>
+<td>Fallboden</td>
+<td>3000</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Bestimmen Sie alle superkeys f ̈ur die gegebene Relation.</li>
+<li>Bestimmen Sie alle candidate keys f ̈ur die gegebene Relation.</li>
+<li>Welche dieser candidate keys sind auch candidate keys f ̈ur das gegebene Schema?</li>
+<li>Welchen primary key w ̈urden Sie w ̈ahlen und warum?</li>
+</ol>
+<h2 id="solution">solution</h2>
+<ol>
+<li>Ort, Skigebiet, Lift</li>
+<li>Ort, skigebiet, Lift</li>
+<li>welches schema</li>
+<li>einen unsigned autoincrement int als primary key, alles andere ist hoechstens ein ueberbleibsel aus den frueheren zeiten wo speicher noch sehr teuer war oder mathematisch interessant aber ffuer ein it system absolut verkomplizierend und unnoetig</li>
+</ol>
+<h1 id="aufgabe-3-relationale-algebra">Aufgabe 3 (Relationale Algebra)</h1>
+<p>Berechnen Sie die folgenden Relationen. Achten Sie dabei auf korrekte Benennung der</p>
+<p>Attribute.</p>
+<p>r:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>d</td>
+</tr>
+<tr>
+<td>b</td>
+<td>d</td>
+</tr>
+<tr>
+<td>b</td>
+<td>e</td>
+</tr>
+<tr>
+<td>c</td>
+<td>f</td>
+</tr>
+</tbody>
+</table>
+<p>s:</p>
+<table>
+<thead>
+<tr>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d</td>
+<td>g</td>
+</tr>
+<tr>
+<td>e</td>
+<td>h</td>
+</tr>
+</tbody>
+</table>
+<p>1.πA(r)
+2.σA=‘b‘(r)
+3.r×s
+4.σr.B=s.B(r×s)
+5.πA(r)−πA(σB=‘d‘(r))</p>
+<h2 id="1">1</h2>
+<h2 id="solution">solution</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">-- πA(r)</span>
+<span class="hljs-keyword">select</span> A <span class="hljs-keyword">from</span> r
+</div></code></pre>
+<ol>
+<li>
+<p>result:
+|A|
+|---|
+|a|
+|b|
+|c|</p>
+</li>
+<li>
+<p>result:</p>
+</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">-- σA=‘b‘(r)</span>
+<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> r <span class="hljs-keyword">where</span> A = <span class="hljs-string">'b'</span>
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>b</td>
+<td>d</td>
+</tr>
+<tr>
+<td>b</td>
+<td>e</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>result:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">-- r×s</span>
+<span class="hljs-keyword">select</span> 
+    r.A <span class="hljs-keyword">as</span> <span class="hljs-string">"r.A"</span>
+    r.B <span class="hljs-keyword">as</span> <span class="hljs-string">"r.B"</span>
+    s.A <span class="hljs-keyword">as</span> <span class="hljs-string">"s.A"</span>
+    s.B <span class="hljs-keyword">as</span> <span class="hljs-string">"s.B"</span>
+    <span class="hljs-keyword">from</span> r, s
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>r.A</th>
+<th>r.B</th>
+<th>s.B</th>
+<th>s.C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>d</td>
+<td>d</td>
+<td>g</td>
+</tr>
+<tr>
+<td>a</td>
+<td>d</td>
+<td>e</td>
+<td>h</td>
+</tr>
+<tr>
+<td>b</td>
+<td>d</td>
+<td>d</td>
+<td>g</td>
+</tr>
+<tr>
+<td>b</td>
+<td>d</td>
+<td>e</td>
+<td>h</td>
+</tr>
+<tr>
+<td>b</td>
+<td>e</td>
+<td>d</td>
+<td>g</td>
+</tr>
+<tr>
+<td>b</td>
+<td>e</td>
+<td>e</td>
+<td>h</td>
+</tr>
+<tr>
+<td>c</td>
+<td>f</td>
+<td>d</td>
+<td>g</td>
+</tr>
+<tr>
+<td>c</td>
+<td>f</td>
+<td>e</td>
+<td>h</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">-- σr.B=s.B(r×s)</span>
+<span class="hljs-keyword">select</span> 
+    r.A <span class="hljs-keyword">as</span> <span class="hljs-string">"r.A"</span>
+    r.B <span class="hljs-keyword">as</span> <span class="hljs-string">"r.B"</span>
+    s.A <span class="hljs-keyword">as</span> <span class="hljs-string">"s.A"</span>
+    s.B <span class="hljs-keyword">as</span> <span class="hljs-string">"s.B"</span>
+    <span class="hljs-keyword">where</span> r.B = s.B
+    <span class="hljs-keyword">from</span> r, s
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>r.A</th>
+<th>r.B</th>
+<th>s.B</th>
+<th>s.C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>d</td>
+<td>d</td>
+<td>g</td>
+</tr>
+<tr>
+<td>b</td>
+<td>d</td>
+<td>d</td>
+<td>g</td>
+</tr>
+<tr>
+<td>b</td>
+<td>e</td>
+<td>e</td>
+<td>h</td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li>result:</li>
+</ol>
+<p>5.1
+πA(r)</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+</tr>
+<tr>
+<td>b</td>
+</tr>
+<tr>
+<td>c</td>
+</tr>
+</tbody>
+</table>
+<p>5.2.1
+σB=‘d‘(r)</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>d</td>
+</tr>
+<tr>
+<td>b</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<p>5.2
+πA(5.2.1)</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+</tr>
+<tr>
+<td>b</td>
+</tr>
+</tbody>
+</table>
+<h3 id="result">result:</h3>
+<p>πA(r)−πA(σB=‘d‘(r)) =&gt; 5.1 - 5.2</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+</tr>
+</tbody>
+</table>
+<p>Datenbanken
+Ubungsblatt 3 ̈</p>
+<h1 id="aufgabe-4-abfragen-mit-relationaler-algebra">Aufgabe 4 (Abfragen mit Relationaler Algebra)</h1>
+<p>Dr ̈ucken Sie die gegebenen Abfragen in der relationalen Algebra aus.</p>
+<p>employee (personname, street, city)
+works (personname, companyname, salary)</p>
+<ol>
+<li>Finde die Namen aller Angestellten, welche f ̈ur First Bank Corporation (”FBC”)
+arbeiten.</li>
+<li>Finde die Namen aller Angestellten, die nicht fur FBC arbeiten. ̈</li>
+<li>Finde die Namen aller Angestellten, f ̈ur die es einen Angestellten der FBC gibt,
+der mindestens genausoviel verdient.</li>
+<li>Finde die Namen aller Angestellten, die mehr verdienen als jeder Angestellte der
+FBC.</li>
+</ol>
+<h2 id="solution">solution</h2>
+<ol>
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">-- πpersonname(σcompanyname=‘FBC‘())</span>
+<span class="hljs-keyword">select</span> personname <span class="hljs-keyword">from</span> works <span class="hljs-keyword">where</span> companyname =<span class="hljs-string">"FBC"</span>
+</div></code></pre>
+<ol start="2">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">-- πpersonname(σcompanyname≠‘FBC‘())</span>
+<span class="hljs-keyword">select</span> personname <span class="hljs-keyword">from</span> works <span class="hljs-keyword">where</span> companyname <span class="hljs-keyword">not</span> <span class="hljs-keyword">like</span> <span class="hljs-string">"FBC"</span>
+</div></code></pre>
+<ol start="3">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">-- πpersonname(σworks.personname≠works2.personname^personname≠‘FBC‘^(works×works as works2))</span>
+<span class="hljs-keyword">select</span> works.personname 
+<span class="hljs-keyword">from</span> works, works <span class="hljs-keyword">as</span> works2 
+<span class="hljs-keyword">where</span> works.personname <span class="hljs-keyword">not</span> <span class="hljs-keyword">like</span> works2.personname <span class="hljs-keyword">and</span>
+works2.companyname = <span class="hljs-string">"FBC"</span> <span class="hljs-keyword">and</span>
+works2.salary &gt;= works.salary
+</div></code></pre>
+<ol start="4">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">-- πpersonname(σworks.companyname≠"FBC"^works2.companyname="FBC"^works.salary&gt;works2.salary(works×works as works2))</span>
+<span class="hljs-keyword">select</span> works.personname 
+<span class="hljs-keyword">from</span> works, works <span class="hljs-keyword">as</span> works2 
+<span class="hljs-keyword">where</span> works.companyname <span class="hljs-keyword">not</span> <span class="hljs-keyword">like</span> <span class="hljs-string">"FBC"</span> <span class="hljs-keyword">and</span> 
+works2.companyname = <span class="hljs-string">"FBC"</span> <span class="hljs-keyword">and</span>
+works.salary &gt; works2.salary
+</div></code></pre>
+<h1 id="aufgabe-5-aquivalente-ausdr-%CC%88-%CC%88ucke">Aufgabe 5 (Aquivalente Ausdr ̈ ̈ucke)</h1>
+<p>Gegeben sind jeweils zwei Ausdr ̈ucke der relationalen Algebrauber den Relationen ̈
+r(A,B,C) undt(A,B,C). Zwei Ausdr ̈uckexundysind ̈aquivalent, wenn fur alle Re- ̈
+lationenrundtdie Auswertung vonxdieselbe Relation liefert, wie die Auswertung
+vony. Untersuchen Sie, ob die folgenden Ausdr ̈ucke ̈aquivalent sind und begr ̈unden Sie
+jeweils Ihre Aussage.</p>
+<pre class="hljs"><code><div>1. σA&gt; 10 (πA,B(r)) und πA,B(σA&gt; 10 (r))
+2. πA(r−t) und πA(r)−πA(t)
+</div></code></pre>
+<h2 id="solution">solution</h2>
+<ol>
+<li></li>
+</ol>
+<p>ja, weil mit der project operation (π) keine manipulation der daten vorgenommen wird, welche in abhaengigkeit des select operators (σ) stehen koennte. dies gilt nur in jenem falle, weil die operationen mit den beiden verschiedenen operatoren auf der spalte &quot;A&quot; vorgenommen werden.
+2.
+nein weil in der minus operation die kombination von allen colums eine rolle spielt</p>
+
+</body>
+</html>
