@@ -9,6 +9,7 @@ purple{color:purple}
 blue{color:blue}
 green{color:green}
 blue{color:blue;}
+
 </style>
 
 Datenbanken

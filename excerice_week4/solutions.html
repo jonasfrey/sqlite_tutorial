@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>solutions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>Datenbanken
+Ubungsblatt 4 ̈</p>
+<h1 id="aufgabe-1-abfragen-mit-relationaler-algebra">Aufgabe 1 (Abfragen mit Relationaler Algebra)</h1>
+<p>Dr ̈ucken Sie die gegebenen Abfragen in der relationalen Algebra aus.</p>
+<pre class="hljs"><code><div>employee (personname, street, city)
+works (personname, companyname, salary)
+company (companyname, city)
+manages (personname, managername)
+</div></code></pre>
+<ol>
+<li>Finde die Namen und Wohnorte aller Angestellten, welche f ̈ur FBC arbeiten.</li>
+<li>Finde die Namen und Wohnorte mit Strasse aller Angestellten, welche f ̈ur FBC
+arbeiten und die mehr als CHF 100’000.- verdienen.</li>
+<li>Finde die Namen aller Angestellten, die in der Stadt arbeiten in der sie auch
+wohnen.</li>
+<li>Finde die Namen aller Angestellten, die in derselben Stadt an derselben Strasse
+wohnen, wie ihr Manager.</li>
+<li>Finde die Firma mit den meisten Angestellten.</li>
+<li>Finde die Firma, welche insgesamt die kleinste Lohnsumme bezahlt.</li>
+<li>Finde diejenigen Firmen, deren Angestelle im Durchschnitt mehr verdienen, als
+der Durchschnittslohn der FBC.</li>
+<li>Finde alle Firmen, die in jeder Stadt sind, in der auch die FBC ist.</li>
+</ol>
+<h2 id="solution">solution</h2>
+<ol>
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> employee <span class="hljs-keyword">where</span> works.companyname = <span class="hljs-string">"FBC"</span> <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> works <span class="hljs-keyword">on</span> employee.personname = works.personname
+</div></code></pre>
+<ol start="2">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> employee <span class="hljs-keyword">where</span> works.companyname = <span class="hljs-string">"FBC"</span> <span class="hljs-keyword">AND</span> <span class="hljs-keyword">where</span> works.salary &lt; <span class="hljs-number">100000</span> <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> works <span class="hljs-keyword">on</span> employee.personname = works.personname
+</div></code></pre>
+<ol start="3">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> employee <span class="hljs-keyword">where</span> works.salary &lt; <span class="hljs-number">100000</span> <span class="hljs-keyword">left</span> 
+<span class="hljs-keyword">join</span> company <span class="hljs-keyword">on</span> employee.city = company.city
+</div></code></pre>
+<ol start="4">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> employee <span class="hljs-keyword">as</span> manager 
+<span class="hljs-keyword">join</span> manages <span class="hljs-keyword">on</span> employee.personname = managers.personname
+</div></code></pre>
+<ol start="5">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MAX</span>(counts) <span class="hljs-keyword">FROM</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(companyname) <span class="hljs-keyword">as</span> counts
+<span class="hljs-keyword">FROM</span> works
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> companyname); 
+</div></code></pre>
+<ol start="6">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MIN</span>(<span class="hljs-keyword">sum</span>) <span class="hljs-keyword">FROM</span> (
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(salary) <span class="hljs-keyword">as</span> lohn
+    <span class="hljs-keyword">FROM</span> works
+    <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> salary
+); 
+</div></code></pre>
+<ol start="7">
+<li></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">AVG</span>(salary) <span class="hljs-keyword">FROM</span> works  <span class="hljs-keyword">where</span> companyname = <span class="hljs-string">"FBC"</span>
+</div></code></pre>
+<ol start="8">
+<li></li>
+</ol>
+<pre class="hljs"><code><div>(<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> company company1, company company2  <span class="hljs-keyword">where</span> company1.companyname = <span class="hljs-string">"FBC"</span> <span class="hljs-keyword">and</span> company1.city = company2.city <span class="hljs-keyword">and</span> company1.companyname <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> company2.companyname)
+</div></code></pre>
+<h3 id="operatoren">operatoren</h3>
+<table>
+<thead>
+<tr>
+<th>additional (helper) operator</th>
+<th>equivalent basic relational algebra operation</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>table_a ∩ table_b</td>
+<td>table_a – (table_a – table_b)</td>
+<td>intersection / schnittmenge</td>
+</tr>
+<tr>
+<td>table_a ⋈ table_b</td>
+<td>nothing</td>
+<td>Natural join (⋈)/ takes only rows where column names and values are the same and merges them into one row on the result</td>
+</tr>
+<tr>
+<td>table_a  ⟕  table_b</td>
+<td>-</td>
+<td>left outer join</td>
+</tr>
+<tr>
+<td>table_a  ⟖  table_b</td>
+<td>-</td>
+<td>right outer join</td>
+</tr>
+<tr>
+<td>table_a  ⟗  table_b</td>
+<td>-</td>
+<td>full outer join</td>
+</tr>
+<tr>
+<td>πID, name, dept_name, salary/12 (table_human)</td>
+<td>asdf</td>
+<td>Generalized Projection/ like normal projection but functions with arithmetic operations and other column names can be used as the selected column names, see &quot;salary/12&quot;</td>
+</tr>
+<tr>
+<td>sum(column_name)(table_name)</td>
+<td>-</td>
+<td>Aggregation / a predefined function , which takes multiple records as input and returns single result (avg, min, max, sum, count)</td>
+</tr>
+</tbody>
+</table>
+<h1 id="aufgabe-2-null-werte">Aufgabe 2 (NULL-Werte)</h1>
+<h2 id="unknown-operations">unknown operations</h2>
+<h3 id="what-is-unknown">what is 'unknown'</h3>
+<p>if 'column_salary' value for this record is null, the result of the operation 'unknown'
+&quot;column_salary &gt; 50000” -&gt; &quot;null &gt; 50000” =&gt; unknown</p>
+<table>
+<thead>
+<tr>
+<th>operation</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unknown or true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>unknown or false</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>unknown or unknown</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>true and unknown</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>false and unknown</td>
+<td>false</td>
+</tr>
+<tr>
+<td>unknown and unknown</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>not unknown</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>not NULL</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>NULL or false</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>NULL or true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>NULL or NULL</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>NULL and false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>NULL and true</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>NULL and NULL</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<p>Gegeben sind folgende Relationenr(A,B,C,D) unds(A,E):</p>
+<h2 id="truthtable--wahrheitstabelle">truthtable / wahrheitstabelle</h2>
+<h3 id="tableschema-rabcd">table/schema r(A,B,C,D)</h3>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>B ·C &lt; 5000</th>
+<th>D is null</th>
+<th>p = (B ·C &lt; 5000 or D is null)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>3</td>
+<td>””</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>700</td>
+<td>Null</td>
+<td>”agh”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>Null</td>
+<td>0</td>
+<td>”abcdf”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>4</td>
+<td>Null</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>Null</td>
+<td>Null</td>
+<td>”bdf”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>1500</td>
+<td>Null</td>
+<td>”c”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknwon</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>1000</td>
+<td>8</td>
+<td>””</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+<td>12</td>
+<td>Null</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tableschema-sae">table/schema s(A,E):</h3>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>”C”</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Evaluieren Sie f ̈ur jede Zeile vonrden Wert des Pr ̈adikatspmit</li>
+</ol>
+<h2 id="solutions">solutions</h2>
+<ol>
+<li>
+<p>see [###table/schema r(A,B,C,D)](###table/schema r(A,B,C,D))</p>
+</li>
+<li>
+<p>σp(r) =&gt; select * from r where p =&gt; select * from r where p = true
+result:
+|A|B|C|D| B ·C &lt; 5000 | D is null| p = (B ·C &lt; 5000 or D is null) |
+|---|---|---|---|---|---|---|
+|”A”|1000|3|””|true | false| true |
+|”A”|1000|4|Null|true | true | true |
+|Null|700|12|Null|false | true | true |</p>
+</li>
+<li>
+<p>AGavg(B),sum(C)(r) =&gt; select avg(B), avg(c) from r
+result:
+|”A”|1000|3|””|true | false| true |
+|”A”|700|Null|”agh”|unknown| false| unknown |
+|”A”|Null|0|”abcdf”|unknown | false| unknown|
+|”A”|1000|4|Null|true | true | true |
+|”B”|Null|Null|”bdf”|unknown | false| unknown |
+|”B”|1500|Null|”c”|unknown | false| unknwon |
+|Null|1000|8|””|false | false | false |
+|Null|700|12|Null|false | true | true |</p>
+</li>
+</ol>
+<p>average of column 'B' = (1000 +700 +1000 +1500 +1000 +700) / 6 = 983,333333333
+sum of column 'C' = (3+0+4+8+12) = 27</p>
+<p>result:</p>
+<table>
+<thead>
+<tr>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>983,333333333</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>AGavg(B)(πA,B(r))</li>
+</ol>
+<ul>
+<li>
+<p>r1 = πA,B(r) =&gt; select A, B from r
+|A|B|
+|---|---|
+|”A”|1000|
+|”A”|700|
+|”A”|Null|
+|”A”|1000|
+|”B”|Null|
+|”B”|1500|
+|Null|1000|
+|Null|700|</p>
+</li>
+<li>
+<p>AGavg(B)(r1)
+average of column 'B' = (1000 +700 +1000 +1500 +1000 +700) / 6 = 983,333333333
+result:
+|B|
+|---|
+|983,333333333|</p>
+</li>
+</ul>
+<ol start="5">
+<li>r ⋈ s</li>
+<li>r ⟖ s</li>
+<li>r ⟗ s</li>
+</ol>
+<h1 id="aufgabe-3-implementation-kartesisches-produkt-und-natural-join">Aufgabe 3 (Implementation Kartesisches Produkt und Natural Join)</h1>
+<p>Gegeben seien Relationenr(A,B) unds(B,C). Die Relationen liegen in Form von Listen
+von Tupeln vor. Tupel sind Listen mit fester L ̈ange, in unserem Falle mit L ̈ange zwei.
+Zus ̈atzlich zu den ̈ublichen Funktionenheadundtailgibt es auf Listen (und damit
+auch auf Tupeln) die Funktionlist cons(element a, list l)die die Liste liefert,
+die durch Voranstellen von Elementaan die Listelentsteht. Die leere Liste heisstnil.
+Andere Funktionen auf Listen gibt es nicht.</p>
+<ol>
+<li>Geben Sie einen Algorithmus an, um das kartesische Produkt der beiden Relatio-
+nen zu berechnen.</li>
+<li>Geben Sie einen Algorithmus an, um den natural join der beiden Relationen zu
+berechnen.</li>
+</ol>
+<h2 id="2">2</h2>
+
+</body>
+</html>
