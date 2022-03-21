@@ -304,6 +304,6 @@ f_a_natural_join(a_a, a_b):
             if(a_a_a[0] == a_a_b[0] or a_a_a[1] == a_a_b[1])
             a_natrual_join.append(a_a_a + a_a_b)
 
-    return a_natrual_join
+    return a_natrual_joing
 ```
 
