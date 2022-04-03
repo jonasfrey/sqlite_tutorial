@@ -37,6 +37,10 @@ create table names (
 ![https://i.makeagif.com/media/6-04-2015/sAXJCA.gif](https://i.makeagif.com/media/6-04-2015/sAXJCA.gif)
 
 
+# clear the screen 
+```sql 
+.shell clear 
+```
 
 # show values / show table content 
 ```sql
