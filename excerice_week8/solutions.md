@@ -1,5 +1,7 @@
 # solutions 
-# full repo at 
+# full source code at: 
+[https://github.com/jonasfrey/sqlite_tutorial/tree/main/excerice_week8](https://github.com/jonasfrey/sqlite_tutorial/tree/main/excerice_week8)
+
 ## JPAExample.java
 ```Java
 ...
