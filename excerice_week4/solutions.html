@@ -438,52 +438,16 @@ der Durchschnittslohn der FBC.</li>
 <pre class="hljs"><code><div>(<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> company company1, company company2  <span class="hljs-keyword">where</span> company1.companyname = <span class="hljs-string">"FBC"</span> <span class="hljs-keyword">and</span> company1.city = company2.city <span class="hljs-keyword">and</span> company1.companyname <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> company2.companyname)
 </div></code></pre>
 <h3 id="operatoren">operatoren</h3>
-<table>
-<thead>
-<tr>
-<th>additional (helper) operator</th>
-<th>equivalent basic relational algebra operation</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>table_a ∩ table_b</td>
-<td>table_a – (table_a – table_b)</td>
-<td>intersection / schnittmenge</td>
-</tr>
-<tr>
-<td>table_a ⋈ table_b</td>
-<td>nothing</td>
-<td>Natural join (⋈)/ takes only rows where column names and values are the same and merges them into one row on the result</td>
-</tr>
-<tr>
-<td>table_a  ⟕  table_b</td>
-<td>-</td>
-<td>left outer join</td>
-</tr>
-<tr>
-<td>table_a  ⟖  table_b</td>
-<td>-</td>
-<td>right outer join</td>
-</tr>
-<tr>
-<td>table_a  ⟗  table_b</td>
-<td>-</td>
-<td>full outer join</td>
-</tr>
-<tr>
-<td>πID, name, dept_name, salary/12 (table_human)</td>
-<td>asdf</td>
-<td>Generalized Projection/ like normal projection but functions with arithmetic operations and other column names can be used as the selected column names, see &quot;salary/12&quot;</td>
-</tr>
-<tr>
-<td>sum(column_name)(table_name)</td>
-<td>-</td>
-<td>Aggregation / a predefined function , which takes multiple records as input and returns single result (avg, min, max, sum, count)</td>
-</tr>
-</tbody>
-</table>
+<br>
+|additional (helper) operator|equivalent basic relational algebra operation|description|
+|---|---|---|
+|table_a ∩ table_b|table_a – (table_a – table_b)|intersection / schnittmenge|
+|table_a ⋈ table_b|nothing|Natural join (⋈)/ takes only rows where column names and values are the same and merges them into one row on the result|
+|table_a  ⟕  table_b |-|left outer join|
+|table_a  ⟖  table_b|-|right outer join|
+|table_a  ⟗  table_b|-|full outer join|
+|πID, name, dept_name, salary/12 (table_human) |asdf|Generalized Projection/ like normal projection but functions with arithmetic operations and other column names can be used as the selected column names, see "salary/12" |
+|sum(column_name)(table_name)|-|Aggregation / a predefined function , which takes multiple records as input and returns single result (avg, min, max, sum, count)
 <h1 id="aufgabe-2-null-werte">Aufgabe 2 (NULL-Werte)</h1>
 <h2 id="unknown-operations">unknown operations</h2>
 <h3 id="what-is-unknown">what is 'unknown'</h3>
@@ -669,26 +633,58 @@ der Durchschnittslohn der FBC.</li>
 </tbody>
 </table>
 <ol>
-<li>Evaluieren Sie f ̈ur jede Zeile vonrden Wert des Pr ̈adikatspmit</li>
+<li></li>
 </ol>
+<p>Evaluieren Sie f ̈ur jede Zeile vonrden Wert des Pr ̈adikatspmit</p>
 <h2 id="solutions">solutions</h2>
-<ol>
-<li>
-<p>see [###table/schema r(A,B,C,D)](###table/schema r(A,B,C,D))</p>
-</li>
-<li>
-<p>σp(r) =&gt; select * from r where p =&gt; select * from r where p = true
-result:
-|A|B|C|D| B ·C &lt; 5000 | D is null| p = (B ·C &lt; 5000 or D is null) |
-|---|---|---|---|---|---|---|
-|”A”|1000|3|””|true | false| true |
-|”A”|1000|4|Null|true | true | true |
-|Null|700|12|Null|false | true | true |</p>
-</li>
-<li>
-<p>AGavg(B),sum(C)(r) =&gt; select avg(B), avg(c) from r
-result:
-|”A”|1000|3|””|true | false| true |
+<h3 id="1-see-tableschema-rabcdtableschema-rabcd">1. see [###table/schema r(A,B,C,D)](###table/schema r(A,B,C,D))</h3>
+<h3 id="2-%CF%83pr--select--from-r-where-p--select--from-r-where-p--true">2. σp(r) =&gt; select * from r where p =&gt; select * from r where p = true</h3>
+<p>result:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>B ·C &lt; 5000</th>
+<th>D is null</th>
+<th>p = (B ·C &lt; 5000 or D is null)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>3</td>
+<td>””</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>4</td>
+<td>Null</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+<td>12</td>
+<td>Null</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-agavgbsumcr--select-avgb-avgc-from-r">3. AGavg(B),sum(C)(r) =&gt; select avg(B), avg(c) from r</h3>
+<p>result:</p>
+<p>|”A”|1000|3|””|true | false| true |
 |”A”|700|Null|”agh”|unknown| false| unknown |
 |”A”|Null|0|”abcdf”|unknown | false| unknown|
 |”A”|1000|4|Null|true | true | true |
@@ -696,10 +692,8 @@ result:
 |”B”|1500|Null|”c”|unknown | false| unknwon |
 |Null|1000|8|””|false | false | false |
 |Null|700|12|Null|false | true | true |</p>
-</li>
-</ol>
-<p>average of column 'B' = (1000 +700 +1000 +1500 +1000 +700) / 6 = 983,333333333
-sum of column 'C' = (3+0+4+8+12) = 27</p>
+<p>average of column 'B' = (1000 +700 +1000 +1500 +1000 +700) / 6 = 983,333333333</p>
+<p>sum of column 'C' = (3+0+4+8+12) = 27</p>
 <p>result:</p>
 <table>
 <thead>
@@ -715,39 +709,459 @@ sum of column 'C' = (3+0+4+8+12) = 27</p>
 </tr>
 </tbody>
 </table>
-<ol start="4">
-<li>AGavg(B)(πA,B(r))</li>
-</ol>
-<ul>
-<li>
-<p>r1 = πA,B(r) =&gt; select A, B from r
-|A|B|
-|---|---|
-|”A”|1000|
-|”A”|700|
-|”A”|Null|
-|”A”|1000|
-|”B”|Null|
-|”B”|1500|
-|Null|1000|
-|Null|700|</p>
-</li>
-<li>
-<p>AGavg(B)(r1)
-average of column 'B' = (1000 +700 +1000 +1500 +1000 +700) / 6 = 983,333333333
-result:
-|B|
-|---|
-|983,333333333|</p>
-</li>
-</ul>
-<ol start="5">
-<li>r ⋈ s</li>
-<li>r ⟖ s</li>
-<li>r ⟗ s</li>
-</ol>
+<h3 id="4-agavgb%CF%80abr">4. AGavg(B)(πA,B(r))</h3>
+<h4 id="r1--%CF%80abr--select-a-b-from-r">r1 = πA,B(r) =&gt; select A, B from r</h4>
+<p>result:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>700</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>Null</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>Null</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>1500</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+</tr>
+</tbody>
+</table>
+<h4 id="agavgbr1">AGavg(B)(r1)</h4>
+<p>average of column 'B' = (1000 +700 +1000 +1500 +1000 +700) / 6 = 983,333333333</p>
+<p>result:</p>
+<table>
+<thead>
+<tr>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>983,333333333</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-r-%E2%8B%88-s">5. r ⋈ s</h3>
+<h4 id="when-no-join-%22on%22-conditionkeyword-is-set-a-corss-join-will-be-performed-which-is-a-multiplication-of-every-row-of-both-tables-with-each-other">when no join &quot;ON&quot; condition/keyword is set, a corss join will be performed, which is a multiplication of every row of both tables with each other</h4>
+<p>https://stackoverflow.com/questions/16470942/how-to-use-mysql-join-without-on-condition/16471286</p>
+<h5 id="r-crossjoin-s">r crossjoin s</h5>
+<table>
+<thead>
+<tr>
+<th>r.A</th>
+<th>r.B</th>
+<th>r.C</th>
+<th>r.D</th>
+<th>s.A</th>
+<th>s.E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>3</td>
+<td>””</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>700</td>
+<td>Null</td>
+<td>”agh”</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>Null</td>
+<td>0</td>
+<td>”abcdf”</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>4</td>
+<td>Null</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>Null</td>
+<td>Null</td>
+<td>”bdf”</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>1500</td>
+<td>Null</td>
+<td>”c”</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>1000</td>
+<td>8</td>
+<td>””</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+<td>12</td>
+<td>Null</td>
+<td>”B”</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>3</td>
+<td>””</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>700</td>
+<td>Null</td>
+<td>”agh”</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>Null</td>
+<td>0</td>
+<td>”abcdf”</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>4</td>
+<td>Null</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>Null</td>
+<td>Null</td>
+<td>”bdf”</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>1500</td>
+<td>Null</td>
+<td>”c”</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>1000</td>
+<td>8</td>
+<td>””</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+<td>12</td>
+<td>Null</td>
+<td>”C”</td>
+<td>2</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>3</td>
+<td>””</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>700</td>
+<td>Null</td>
+<td>”agh”</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>Null</td>
+<td>0</td>
+<td>”abcdf”</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>4</td>
+<td>Null</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>Null</td>
+<td>Null</td>
+<td>”bdf”</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>1500</td>
+<td>Null</td>
+<td>”c”</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>1000</td>
+<td>8</td>
+<td>””</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+<td>12</td>
+<td>Null</td>
+<td>”C”</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>result:</p>
+<p>|A|B|C|D| B ·C &lt; 5000 | D is null| p = (B ·C &lt; 5000 or D is null) | E |
+|---|---|---|---|---|---|---|
+|”B”|Null|Null|”bdf”|unknown | false| unknown | 1 |
+|”B”|1500|Null|”c”|unknown | false| unknwon | 2 |</p>
+<h3 id="6-r-%E2%9F%96-s">6. r ⟖ s</h3>
+<p>result:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>B ·C &lt; 5000</th>
+<th>D is null</th>
+<th>p = (B ·C &lt; 5000 or D is null)</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>3</td>
+<td>””</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+<td>null</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>700</td>
+<td>Null</td>
+<td>”agh”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+<td>null</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>Null</td>
+<td>0</td>
+<td>”abcdf”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+<td>null</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>4</td>
+<td>Null</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>1000</td>
+<td>8</td>
+<td>””</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+<td>12</td>
+<td>Null</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-r-%E2%9F%97-s">7. r ⟗ s</h3>
+<p>result:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>B ·C &lt; 5000</th>
+<th>D is null</th>
+<th>p = (B ·C &lt; 5000 or D is null)</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>3</td>
+<td>””</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+<td>null</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>700</td>
+<td>Null</td>
+<td>”agh”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+<td>null</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>Null</td>
+<td>0</td>
+<td>”abcdf”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+<td>null</td>
+</tr>
+<tr>
+<td>”A”</td>
+<td>1000</td>
+<td>4</td>
+<td>Null</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>null</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>Null</td>
+<td>Null</td>
+<td>”bdf”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknown</td>
+<td>1</td>
+</tr>
+<tr>
+<td>”B”</td>
+<td>1500</td>
+<td>Null</td>
+<td>”c”</td>
+<td>unknown</td>
+<td>false</td>
+<td>unknwon</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>1000</td>
+<td>8</td>
+<td>””</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>700</td>
+<td>12</td>
+<td>Null</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
 <h1 id="aufgabe-3-implementation-kartesisches-produkt-und-natural-join">Aufgabe 3 (Implementation Kartesisches Produkt und Natural Join)</h1>
-<p>Gegeben seien Relationenr(A,B) unds(B,C). Die Relationen liegen in Form von Listen
+<p>Gegeben seien Relationen <code>r(A,B)</code> und <code>s(B,C)</code>. Die Relationen liegen in Form von Listen
 von Tupeln vor. Tupel sind Listen mit fester L ̈ange, in unserem Falle mit L ̈ange zwei.
 Zus ̈atzlich zu den ̈ublichen Funktionenheadundtailgibt es auf Listen (und damit
 auch auf Tupeln) die Funktionlist cons(element a, list l)die die Liste liefert,
@@ -760,6 +1174,31 @@ nen zu berechnen.</li>
 berechnen.</li>
 </ol>
 <h2 id="2">2</h2>
+<pre class="hljs"><code><div>
+f_a_cartesian_product(a_a, a_b):
+    <span class="hljs-comment"># a_a = [[2,3], [3,2], [22,3], ...]</span>
+    <span class="hljs-comment"># a_b = [[33,12], [54,23], [2,1], ...]</span>
+    <span class="hljs-comment"># a_product = [[2,3,33,12],[2,3,54,23],[2,3,2,1],[3,2,33,12]...]</span>
+    a_product = []
+    <span class="hljs-keyword">for</span> a_a_a <span class="hljs-keyword">in</span> a_a:
+        <span class="hljs-keyword">for</span> a_a_b <span class="hljs-keyword">in</span> a_b: 
+            a_product.append(a_a_a + a_a_b)
+
+    <span class="hljs-keyword">return</span> a_product
+
+
+f_a_natural_join(a_a, a_b):
+    <span class="hljs-comment"># a_a = [[2,3], [3,2], ...]</span>
+    <span class="hljs-comment"># a_b = [[2,5], [54,23], ...]</span>
+    <span class="hljs-comment"># a_natrual_join = [[2,3,2,5]]</span>
+    a_natrual_join = []
+    <span class="hljs-keyword">for</span> a_a_a <span class="hljs-keyword">in</span> a_a:
+        <span class="hljs-keyword">for</span> a_a_b <span class="hljs-keyword">in</span> a_b: 
+            <span class="hljs-keyword">if</span>(a_a_a[<span class="hljs-number">0</span>] == a_a_b[<span class="hljs-number">0</span>] <span class="hljs-keyword">or</span> a_a_a[<span class="hljs-number">1</span>] == a_a_b[<span class="hljs-number">1</span>])
+            a_natrual_join.append(a_a_a + a_a_b)
+
+    <span class="hljs-keyword">return</span> a_natrual_joing
+</div></code></pre>
 
 </body>
 </html>
