@@ -365,7 +365,10 @@ code {
           : 'default'
     });
   </script>
+<h2 id="aufgabe-1">Aufgabe 1</h2>
+<p><img src="./aufgabe_eins.jpeg" alt="./aufgabe_eins.jpeg"></p>
 <h1 id="aufgabe-2-er-diagram-fur-kinokette">Aufgabe 2 (ER-Diagram fur Kinokette)</h1>
+<p><img src="./aufgabe_zwei.jpeg" alt="./aufgabe_zwei.jpeg"></p>
 <h2 id="schema-aus-erd">Schema aus ERD</h2>
 <pre class="hljs"><code><div>
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> kino (
@@ -421,6 +424,87 @@ code {
 	<span class="hljs-keyword">id</span> <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
 	<span class="hljs-keyword">name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
 );
+</div></code></pre>
+<h1 id="aufgabe-3">Aufgabe 3</h1>
+<p><img src="./aufgabe_trei.jpeg" alt="./aufgabe_trei.jpeg"></p>
+<h2 id="2-db-schema">2. DB Schema</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> produkt (
+	<span class="hljs-keyword">id</span> <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> lieferung (
+	<span class="hljs-keyword">id</span> <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	preis <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+	kunde_id <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+   <span class="hljs-built_in">date</span> DATETIME <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>, 
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (kunde_id)
+       <span class="hljs-keyword">REFERENCES</span> kunde (kunde_id)
+
+	product_id <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (product_id)
+       <span class="hljs-keyword">REFERENCES</span> product (product_id)
+	holding_id <span class="hljs-built_in">INTEGER</span> 
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (holding_id)
+       <span class="hljs-keyword">REFERENCES</span> holding (holding_id)
+	firma_id <span class="hljs-built_in">INTEGER</span> 
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (firma_id)
+       <span class="hljs-keyword">REFERENCES</span> firma (firma_id)
+	filiale_id <span class="hljs-built_in">INTEGER</span> 
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (filiale_id)
+       <span class="hljs-keyword">REFERENCES</span> filiale (filiale_id)
+);
+
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> kunde (
+	<span class="hljs-keyword">id</span> <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+	lieferung_id <span class="hljs-built_in">INTEGER</span>
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (lieferung_id)
+       <span class="hljs-keyword">REFERENCES</span> lieferung (lieferung_id)
+	holding_id <span class="hljs-built_in">INTEGER</span> 
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (holding_id)
+       <span class="hljs-keyword">REFERENCES</span> holding (holding_id)
+	firma_id <span class="hljs-built_in">INTEGER</span> 
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (firma_id)
+       <span class="hljs-keyword">REFERENCES</span> firma (firma_id)
+	filiale_id <span class="hljs-built_in">INTEGER</span> 
+   <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (filiale_id)
+       <span class="hljs-keyword">REFERENCES</span> filiale (filiale_id)
+
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> holding (
+	<span class="hljs-keyword">id</span> <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+   adresse <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> firma (
+	<span class="hljs-keyword">id</span> <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+   adresse <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+);
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> filiale (
+	<span class="hljs-keyword">id</span> <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+   adresse <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+</div></code></pre>
+<h2 id="3-sql-queries">3. sql queries</h2>
+<h3 id="a">a.</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> lieferung <span class="hljs-keyword">where</span> <span class="hljs-built_in">date</span> &gt; <span class="hljs-string">'2005-01-12'</span>
+</div></code></pre>
+<h3 id="b">b.</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> lieferung 
+   <span class="hljs-keyword">join</span> holding <span class="hljs-keyword">on</span> lieferung.holding_id = holding.id
+   <span class="hljs-keyword">where</span> holding.name = <span class="hljs-string">"ABC Holding"</span>
+</div></code></pre>
+<h3 id="c">c.</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">select</span> <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">from</span> lieferung 
+   <span class="hljs-keyword">join</span> holding <span class="hljs-keyword">on</span> lieferung.holding_id = holding.id
+   <span class="hljs-keyword">where</span> holding.name = <span class="hljs-string">"ABC Holding"</span>
+   <span class="hljs-keyword">UNION</span> <span class="hljs-keyword">ALL</span> 
+   <span class="hljs-keyword">WHERE</span> <span class="hljs-literal">TRUE</span>; 
 </div></code></pre>
 
 </body>
